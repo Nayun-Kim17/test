@@ -9,8 +9,8 @@
 		body{margin:0; background-color: #F2F2F2;}
 		p {font-family: 'Black Han Sans', sans-serif; margin: 0.2vh 0;}
 		.title {font-size:22px; padding: 2vw 2vw;}
-		#timer {font-size: 35px;}
-		#score {font-size: 35px;}
+		#timer {font-size: 3vw;}
+		#score {font-size: 3vw;}
 		#grid {
 			width:69vw; 
 			height: 45vw; 
@@ -25,7 +25,7 @@
 		.taken{ }
 
 		#menubutton{display: none;}
-	    .menu{cursor: pointer; position: relative; bottom:0; right:-80vw; width:auto; height:6vh; margin:2vw 0; z-index: 50;}
+	    .menu{cursor: pointer; position: relative; bottom:0; right:-83vw; width:auto; height:6vh; margin:2vw 0; z-index: 50;}
  
 	    .container{box-sizing:border-box;}
 	    .menuWin{
@@ -42,7 +42,7 @@
 	      opacity:0;
 	      transition:0.35s;
 	    }
-	    .menuWin p {font-family: 'Black Han Sans', sans-serif; }
+	    .menuWin p {font-family: 'Black Han Sans', sans-serif; font-size:10vh;}
 	    .menuWin p:hover{color:#4ADF68;}
 	    .menuWin a{text-decoration:none}
      	.menuWin a:hover, .menuWin a:focus {color:#4ADF68; background-color: none;text-decoration:none}
@@ -72,9 +72,13 @@
 			  top: 0;
 			  left: 0;
 			  transition:0.35s;
-			  
+			  overflow-y: hidden;
 			  background-color: blue;
     	}
+    	.finish-content{  
+    		position: relative;
+  			top: 25%;
+  			text-align: center;}
 	</style>
 </head>
 <body>
@@ -103,7 +107,7 @@
           </div>
 
           <div class="finish" id="finish">
-          	<div>
+          	<div class="finish-content">
           		<p>finish!</p>
           	</div>
           </div>
@@ -126,7 +130,7 @@
 				<p>SCORE</p>
 			</div>
 			<div>
-				<p id="score">dasdfafsedf</p>
+				<p id="score">23</p>
 			</div>
 		</div>
 
