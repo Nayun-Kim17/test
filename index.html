@@ -8,7 +8,7 @@
 		@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 		body{margin:0; background-color: #F2F2F2;}
 		p {font-family: 'Black Han Sans', sans-serif; margin: 0.2vh 0;}
-		.title {font-size:1.5vw; padding: 2vw 2vw;}
+		.title {font-size:22px; padding: 2vw 2vw;}
 		#timer {font-size: 35px;}
 		#score {font-size: 35px;}
 		#grid {
@@ -18,14 +18,14 @@
 			flex-wrap: wrap;
 			justify-content: space-around;
 			padding:1vh;
-			
+			margin: 0;
 			box-shadow: 10px 10px 15px inset rgba(0, 0, 0, 0.2);}
 		#grid div { box-sizing:border-box; width:3vw; height:3vw; margin:0; }
 		.tetro {}
 		.taken{ }
 
 		#menubutton{display: none;}
-	    .menu{cursor: pointer; position: relative; bottom:0; right:-80vw; width:auto; height:6vh; margin:2vw 0;}
+	    .menu{cursor: pointer; position: relative; bottom:0; right:-80vw; width:auto; height:6vh; margin:2vw 0; z-index: 50;}
  
 	    .container{box-sizing:border-box;}
 	    .menuWin{
@@ -36,7 +36,7 @@
 	      height:100vh;
 	      background-color: #F2F2F2;
 	      position:fixed;
-	      z-index:1;
+	      z-index:2;
 	      top:-100%;
 	      left:0;
 	      opacity:0;
@@ -45,7 +45,7 @@
 	    .menuWin p {font-family: 'Black Han Sans', sans-serif; }
 	    .menuWin p:hover{color:#4ADF68;}
 	    .menuWin a{text-decoration:none}
-     	.menuWin a:active{color:#4ADF68; background-color: none;text-decoration:none}
+     	.menuWin a:hover, .menuWin a:focus {color:#4ADF68; background-color: none;text-decoration:none}
 		.altop{
 			box-sizing:border-box; 
 			position:relative; 
@@ -64,6 +64,17 @@
    			flex-direction: column;
    			align-items: center;
     		justify-content: center;}
+    	.finish {
+    		width:100vw;
+	        height:0;
+	        position: fixed;
+			  z-index: 1;
+			  top: 0;
+			  left: 0;
+			  transition:0.35s;
+			  
+			  background-color: blue;
+    	}
 	</style>
 </head>
 <body>
@@ -91,6 +102,12 @@
                 </div>
           </div>
 
+          <div class="finish" id="finish">
+          	<div>
+          		<p>finish!</p>
+          	</div>
+          </div>
+
 	<button id="startBtn">start/stop</button>
      <section class="gameZone">     
 		<div class="columnflex">
@@ -103,7 +120,7 @@
 		</div>
 			
 		
-		<div id="grid"></div>
+		<div id="grid" class=""></div>
 		<div class="columnflex">
 			<div>
 				<p>SCORE</p>
@@ -119,12 +136,32 @@
 	<script src="./index.js"></script>
 
 	<script type="text/javascript">
-
+		function Finish () {
+			 document.getElementById("finish").style.height = "100%";
+		} 
 		//타이머
+
 		function Mytimer(){
-			document.getElementById("timer").innerHTML = "min:sec";
-		};
+
+			var time = 60;
+			var sec = "60"
+
+			var x = setInterval(function(){
+				sec = time % 60;
+	        	
+
+				document.getElementById("timer").innerHTML = sec; time--;
+				if (time < 0) {
+                clearInterval(x);
+            	Finish(); }
+			},1000)
+			;}
+
+
 		Mytimer();
+
+		
+		
 
 		//배경 그리드를 위한 div 반복
 		var addGrid = "<div></div>";
@@ -256,7 +293,6 @@
 		function draw() {
 			current.forEach(index => {
 				squares[currentPosition + index].classList.add("tetro");
-				console.log(index);
 				squares[currentPosition + index].style.backgroundColor = colors[random];
 				squares[currentPosition + index].style.borderRadius = radius[radiusRandom];
 			})
@@ -340,6 +376,7 @@
 		startBtn.addEventListener('click',() => {
 			if (timerId) {
 				clearInterval(timerId);
+				clearInterval(Mytimer);
 				timerId = null;
 			} else {
 				draw();
@@ -351,8 +388,9 @@
 		//점수
 		function gameOver() {
 			if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-				clearInterval(timerId);
-			}
+				clearInterval(Mytimer);
+				Finish();
+			};
 		}
 		
 	</script>
