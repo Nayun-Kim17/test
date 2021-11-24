@@ -8,7 +8,7 @@
 		@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 		body{margin:0; background-color: #F2F2F2;}
 		p {font-family: 'Black Han Sans', sans-serif; margin: 0.2vh 0;}
-		.title {font-size:1.5vw; margin: 2vw 2vw;}
+		.title {font-size:1.5vw; padding: 2vw 2vw;}
 		#timer {font-size: 2vw;}
 		#score {font-size: 2vw;}
 		#grid {
@@ -43,6 +43,9 @@
 	      transition:0.35s;
 	    }
 	    .menuWin p {font-family: 'Black Han Sans', sans-serif; }
+	    .menuWin p:hover{color:#4ADF68;}
+	    .menuWin a{text-decoration:none}
+     	.menuWin a:active{color:#4ADF68; background-color: none;text-decoration:none}
 		.altop{
 			box-sizing:border-box; 
 			position:relative; 
@@ -57,7 +60,7 @@
 		.gameZone div {margin-left: auto; 
 			margin-right: auto; }
 		.columnflex {
-			width:15vw;
+			
 			display: flex;
    			flex-direction: column;
    			align-items: center;
@@ -241,7 +244,7 @@
 		var currentPosition =  Math.floor(Math.random() * (19 - 4 ) + 4);
 		var currentRotation = 0;
 		//radom한 테트리스 불러오기
-		var positionRandom = Math.floor(Math.random()*23);
+		var positionRandom = Math.floor(Math.random()*22);
 		var radiusRandom = Math.floor(Math.random()*5);
 		var colorRandom = Math.floor(Math.random() * 7);
 		var random = Math.floor(Math.random()*allTetros.length);
